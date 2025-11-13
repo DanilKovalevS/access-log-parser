@@ -17,30 +17,31 @@ public class Main {
             int maxLength = 0;
             int minLength = Integer.MAX_VALUE;
             int linesCount = 0;
-            try {
-                FileReader fileReader = new FileReader(path);
-                BufferedReader reader = new BufferedReader(fileReader);
+            try (FileReader fileReader = new FileReader(path);
+                 BufferedReader reader = new BufferedReader(fileReader)) {
                 String line;
-                while ((line = reader.readLine()) != null) {
+                while((line =reader.readLine())!=null)
+
+                {
                     if (line.length() > 1024) {
                         throw new LogParserExeption("Превышен лимит символов для одной строки - 1024 max");
                     }
                     int length = line.length();
                     linesCount++;
                     if (length > maxLength) {
-                        maxLength=length;
+                        maxLength = length;
                     }
                     if (length < minLength) {
-                        minLength=length;
+                        minLength = length;
                     }
                 }
-            } catch (Exception e) {
+            } catch(Exception e){
                 e.printStackTrace();
                 break;
             }
-            System.out.println(maxLength+" || "+minLength+" || "+linesCount);
+            System.out.println(maxLength + " || " + minLength + " || " + linesCount);
             break;
-        }
+            }
 
+        }
     }
-}
