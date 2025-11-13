@@ -14,8 +14,8 @@ public class Main {
                 continue;
             }
             System.out.println("Путь указан верно");
-            int maxLenght = 0;
-            int minLenght = 1024;
+            int maxLength = 0;
+            int minLength = Integer.MAX_VALUE;
             int linesCount = 0;
             try {
                 FileReader fileReader = new FileReader(path);
@@ -23,22 +23,22 @@ public class Main {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.length() > 1024) {
-                        throw new RuntimeException("Превышен лимит символов для одной строки - 1024 max");
+                        throw new LogParserExeption("Превышен лимит символов для одной строки - 1024 max");
                     }
                     int length = line.length();
                     linesCount++;
-                    if (length > maxLenght) {
-                        maxLenght=length;
+                    if (length > maxLength) {
+                        maxLength=length;
                     }
-                    if (length < minLenght) {
-                        minLenght=length;
+                    if (length < minLength) {
+                        minLength=length;
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 break;
             }
-            System.out.println(maxLenght+" || "+minLenght+" || "+linesCount);
+            System.out.println(maxLength+" || "+minLength+" || "+linesCount);
             break;
         }
 
